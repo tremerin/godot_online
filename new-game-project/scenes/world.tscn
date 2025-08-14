@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckr1scb8x3opv"]
+[gd_scene load_steps=5 format=3 uid="uid://ckr1scb8x3opv"]
+
+[ext_resource type="Script" uid="uid://hqffbcjixb74" path="res://scenes/world_manager.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://c8agx0equiprq" path="res://scenes/player.tscn" id="2_4wyf3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
 
 [node name="world" type="Node3D"]
+script = ExtResource("1_rwgxs")
+player_scene = ExtResource("2_4wyf3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -24,3 +29,15 @@ transform = Transform3D(1, 0, 0, 0, 0.821149, 0.570714, 0, -0.570714, 0.821149, 
 
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="0" type="Marker3D" parent="Spawner" groups=["player_spawn_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="1" type="Marker3D" parent="Spawner" groups=["player_spawn_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="2" type="Marker3D" parent="Spawner" groups=["player_spawn_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="3" type="Marker3D" parent="Spawner" groups=["player_spawn_point"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
