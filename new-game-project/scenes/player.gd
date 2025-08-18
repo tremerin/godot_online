@@ -12,9 +12,13 @@ func _enter_tree():
 
 func _ready() -> void:
 	sync.set_multiplayer_authority(name.to_int())
-	#for player in GameManager.players:
-	#	print(player)
-	label_name.text = "ID:" + name
+	for player in GameManager.players.keys():
+		if name == str(player):
+			label_name.text = GameManager.players.get(player).get("name")
+	#if sync.get_multiplayer_authority() == multiplayer.get_unique_id():
+	#	print("im ",name)
+
+	#label_name.text = GameManager.players.get(name)
 
 
 func _physics_process(delta):

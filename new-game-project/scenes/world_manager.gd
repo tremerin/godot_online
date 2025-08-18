@@ -12,3 +12,5 @@ func _ready() -> void:
 			if spawn.name == str(index):
 				current_player.global_position = spawn.global_position
 		index += 1
+		
+	
