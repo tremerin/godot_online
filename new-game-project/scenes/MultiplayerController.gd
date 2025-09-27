@@ -3,13 +3,17 @@ extends Control
 @export var address = "127.0.0.1"
 @export var port = 4242
 var peer: ENetMultiplayerPeer
-
+@onready var http: HTTPRequest = $HTTPRequest 
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
+	#local ip
+	var ips = IP.get_local_addresses()
+	for ip in ips:
+		print(ip)
 
 
 func _on_host_pressed() -> void:
@@ -22,6 +26,7 @@ func _on_host_pressed() -> void:
 	multiplayer.set_multiplayer_peer(peer)
 	send_player_information($CenterContainer/VBoxContainer/LineEdit.text, multiplayer.get_unique_id())
 	print("Waiting for players")
+	http.request("https://ifconfig.me/all.json")
 
 
 func _on_join_pressed() -> void:
@@ -65,3 +70,20 @@ func connected_to_server():
 	
 func connection_failed():
 	print("Connection failed")
+
+
+func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	print(result)
+	print(response_code)
+	if response_code == 200:
+		print("200")
+		#var data = JSON.parse_string(body.get_string_from_utf8())
+		#print("Public IP:", data["ip"])
+		#print(headers)
+		#print("body:", body)
+		var response_text = body.get_string_from_utf8()
+		print("Raw response:", response_text)  # Para debug
+		var data = JSON.parse_string(response_text)
+		print("Data:", data)
+		print(data["ip_addr"])
+		print(data["port"])

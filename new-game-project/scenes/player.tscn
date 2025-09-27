@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8agx0equiprq"]
+[gd_scene load_steps=7 format=3 uid="uid://c8agx0equiprq"]
 
 [ext_resource type="Script" uid="uid://cna7qsmw8x20t" path="res://scenes/player.gd" id="1_3vyb7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3vyb7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2els"]
+albedo_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3vyb7"]
 properties/0/path = NodePath(".:position")
@@ -20,6 +25,11 @@ shape = SubResource("CapsuleShape3D_u8vuu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_3vyb7")
 
+[node name="Face" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.439371, -0.477449)
+mesh = SubResource("BoxMesh_3vyb7")
+surface_material_override/0 = SubResource("StandardMaterial3D_g2els")
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23247, 0)
 text = "player
@@ -28,3 +38,6 @@ font_size = 64
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_3vyb7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.894474, 0.447119, 0, -0.447119, 0.894474, 0, 1.23933, 2.94393)

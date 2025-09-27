@@ -1,6 +1,10 @@
 extends Node3D
 
 @export var player_scene : PackedScene
+var size:int = 5
+var bricks: Array[PackedScene] = []
+@onready var sync: MultiplayerSynchronizer = $MultiplayerSynchronizer
+
 
 func _ready() -> void:
 	var index = 0
@@ -13,4 +17,16 @@ func _ready() -> void:
 				current_player.global_position = spawn.global_position
 		index += 1
 		
+	bricks.resize(5)
+	bricks[0] = preload("res://assets/blocks/bricks_A.gltf")
+	bricks[1] = preload("res://assets/blocks/bricks_B.gltf")
+	bricks[2] = preload("res://assets/blocks/dirt.gltf")
+	bricks[3] = preload("res://assets/blocks/dirt_with_grass.gltf")
+	bricks[4] = preload("res://assets/blocks/grass.gltf")
+	randomize()
 	
+	for i in range(size):
+		var n = randi() % 5
+		var block = bricks[n].instantiate()
+		block.position = Vector3(0,1,i * 2)
+		add_child(block)

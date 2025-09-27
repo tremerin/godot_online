@@ -39,6 +39,9 @@ text = "Join"
 layout_mode = 2
 text = "Start Game"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

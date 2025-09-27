@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckr1scb8x3opv"]
+[gd_scene load_steps=8 format=3 uid="uid://ckr1scb8x3opv"]
 
 [ext_resource type="Script" uid="uid://hqffbcjixb74" path="res://scenes/world_manager.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://c8agx0equiprq" path="res://scenes/player.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://gb63nieym4ak" path="res://assets/blocks/bricks_A.gltf" id="3_4wyf3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gv5m4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4wyf3"]
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_rwgxs")
@@ -20,9 +25,6 @@ shape = SubResource("BoxShape3D_gv5m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("BoxMesh_f3sb7")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.79653, 0.604599, 0, -0.604599, 0.79653, 0, 7.51792, 12.9023)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.821149, 0.570714, 0, -0.570714, 0.821149, 0, 6, 12)
@@ -41,3 +43,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
 [node name="3" type="Marker3D" parent="Spawner" groups=["player_spawn_point"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="bricks_A2" parent="." instance=ExtResource("3_4wyf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.10451, 0.508015, -8.19986)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80297, 0, -6.6832)
+mesh = SubResource("BoxMesh_4wyf3")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4wyf3")
