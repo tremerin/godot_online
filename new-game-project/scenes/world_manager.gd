@@ -16,7 +16,10 @@ func _ready() -> void:
 			if spawn.name == str(index):
 				current_player.global_position = spawn.global_position
 		index += 1
-		
+	
+	var my_id = multiplayer.get_unique_id()
+	print("my id:", my_id)
+	
 	bricks.resize(5)
 	bricks[0] = preload("res://assets/blocks/bricks_A.gltf")
 	bricks[1] = preload("res://assets/blocks/bricks_B.gltf")
@@ -25,8 +28,17 @@ func _ready() -> void:
 	bricks[4] = preload("res://assets/blocks/grass.gltf")
 	randomize()
 	
-	for i in range(size):
-		var n = randi() % 5
-		var block = bricks[n].instantiate()
-		block.position = Vector3(0,1,i * 2)
-		add_child(block)
+	if my_id == 1:
+		for i in range(size):
+			var n = (randi() % 6) - 1
+			create_block.rpc(n, 2, 0, 1, i)
+			#var block = bricks[n].instantiate()
+			#block.position = Vector3(0,1,i * 2)
+			#add_child(block)
+
+@rpc("call_local")
+func create_block(type:int, size:int, x:int, y:int, z:int):
+	var block = bricks[type].instantiate()
+	block.position = Vector3(x * size, y * size, z * size)
+	add_child(block)
+	pass

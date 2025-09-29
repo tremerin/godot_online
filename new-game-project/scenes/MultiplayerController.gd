@@ -82,8 +82,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		#print(headers)
 		#print("body:", body)
 		var response_text = body.get_string_from_utf8()
-		print("Raw response:", response_text)  # Para debug
+		#print("Raw response:", response_text)  # Para debug
 		var data = JSON.parse_string(response_text)
-		print("Data:", data)
+		#print("Data:", data)
 		print(data["ip_addr"])
 		print(data["port"])
